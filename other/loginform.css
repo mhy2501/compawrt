@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet  MS', sans-serif;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.6)), url(images/dogandcat.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.form-box{
+    width: 380px;
+    height: 550px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.button-box {
+    width: 200px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px rgb(240, 226, 236);
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right, rgb(231, 18, 170), rgb(139, 213, 229));
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.input-group {
+    top: 160px;
+    position: absolute;
+    width: 280px;
+    transition: 0.3s;
+    
+}
+
+.input-group2 {
+    top: 100px;
+    position: absolute;
+    width: 280px;
+    transition: 0.3s;
+}
+
+.input-group .input-field {
+    width: 100%;
+    padding: 10px 0px 5px 3px;
+    margin: 8px 0;
+    border: 1px solid rgb(153, 153, 153);
+    outline: none;
+    background: transparent;
+}
+.input-group2 .input-field {
+    width: 100%;
+    padding: 8px 0px 5px 3px;
+    margin: 5px 0;
+    border: 1px solid rgb(153, 153, 153);
+    outline: none;
+    background: transparent;
+}
+
+.form-control-error {
+    color: black;
+}
+
+.input-group2 .errorMessage {
+    padding-bottom: 5px;
+    font-size: 12px;
+    color: rgb(223, 17, 17);
+}
+
+.form-control-error .input-field{
+	border-color: #e74c3c;
+}
+
+.form-control-success .errorMessage {
+    visibility: hidden;
+}
+
+.form-control-error .errorMessage {
+	visibility: visible;
+}
+
+.submit-btn {
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(to right, rgb(231, 18, 170), rgb(139, 213, 229));
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    font-size: 18px;
+}
+.submit-btn:active {
+    transform: scale(0.98)
+}
+
+.submit-btn2 {
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+    background: linear-gradient(to right, rgb(231, 18, 170), rgb(139, 213, 229));
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+}
+
+.submit-btn2:active {
+    transform: scale(0.98)
+}
+
+.check-box {
+    margin: 10px 10px 30px 0;
+    position:absolute
+}
+
+span {
+    color: #777;
+    font-size: 13px;
+    left: 20px;
+    top: 6px;
+    position: relative;
+}
+#login {
+    left: 50px;
+}
+
+#signup {
+    left: 450px;
+}
