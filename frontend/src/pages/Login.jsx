@@ -1,6 +1,6 @@
 import SignUpImg from '../assets/loginsignup.jpg'
 import { useState, useRef, useEffect } from 'react'
-import {Form, useSearchParams, Link, useNavigate} from 'react-router-dom'
+import {Form, useSearchParams, Link, useNavigate,redirect} from 'react-router-dom'
 import app from '../api/axios-config'
 import './Signup.css' 
 
@@ -30,7 +30,7 @@ function Login() {
       const res = await app.post('/login', data)
         console.log(res)
         localStorage.setItem('token', res.data.token)
-        navigate('/dashboard')
+        redirect('/dashboard')
         // setUsername('')
         // setPassword('')
       } catch (err) {

@@ -21,7 +21,7 @@ function Dashboard() {
           <FontAwesomeIcon icon={faUser} />
           <span > 
             Profile
-          {/* <DashboardProfile /> */}
+          
           <UserProfile />
           </span>
          </div>
