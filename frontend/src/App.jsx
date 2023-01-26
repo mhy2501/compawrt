@@ -55,9 +55,9 @@ function App() {
             <Route
               path='/dashboard'
               element={
-                // isAuthenticated ? 
+                isAuthenticated ? 
                 <Dashboard /> 
-                // : <Navigate replace={true} to='/login' />
+                : <Navigate replace={true} to='/login' />
               }
             />
       </Route>
