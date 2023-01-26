@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import app from '../api/axios-config'
-
+import DashboardProfile from './DashboardProfile'
 
 function UserProfile() {
-    const [user, setUser] = useState("")
+    const [user, setUser] = useState(null)
     const [error, setError] = useState('')
 
     useEffect(() => {
@@ -22,8 +22,8 @@ function UserProfile() {
  console.log(user)
   return (
     <>
-      {/* <DashboardProfile user={user} /> */}
-   {console.log(user)}
+      {user && <DashboardProfile user={user} />}
+   {/* {console.log(user)} */}
    </>
   )
     
