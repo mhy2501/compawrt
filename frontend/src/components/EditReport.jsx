@@ -11,13 +11,17 @@ function EditReport() {
   const navigate = useNavigate();
 
   const [reportData, setReportData] = useState(data[0]);
+  const [image, setImage] =useState(null)
   const [loading, setLoading] = useState(false);
+
   console.log(reportData);
+
   const handleChange = (e) => {
     setReportData({ ...reportData, [e.target.name]: e.target.value });
   };
   const handleFileChange = (e) => {
     setReportData({ ...reportData, image_of_the_stray: e.target.files[0] });
+    setImage(URL.createObjectURL(e.target.files[0]))
   };
 
   const handleSubmit = async (e) => {
@@ -168,7 +172,7 @@ function EditReport() {
         <div>
           <img
             className="reportImg"
-            src={reportData.image_of_the_stray}
+            src={!image ? reportData.image_of_the_stray : image}
             alt="stray"
           />
         </div>

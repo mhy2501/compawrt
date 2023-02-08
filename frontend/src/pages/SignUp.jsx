@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import app from "../api/axios-config";
 import "./Signup.css";
 
-
 const USERNAME_REGEX = /^[A-Za-z][a-zA-Z0-9-_]{3,23}$/;
 const NAME_REGEX = /^[A-Za-z]+$/;
 const PASSWORD_REGEX =
@@ -15,7 +14,6 @@ const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 function SignUp() {
-  
   const usernameRef = useRef();
   const errRef = useRef();
   const navigate = useNavigate();
@@ -36,7 +34,6 @@ function SignUp() {
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  
   const [organization, setOrganization] = useState("");
 
   const [password, setPassword] = useState("");
@@ -79,8 +76,8 @@ function SignUp() {
     try {
       const data = Object.fromEntries(new FormData(e.target));
       const res = await app.post("/register", data);
-      navigate('/dashboard')
-      console.log(data)
+      navigate("/login");
+      console.log(data);
       setUsername("");
       setFirstName("");
       setLastName("");
@@ -108,7 +105,7 @@ function SignUp() {
         <p ref={errRef} className={error ? "error" : "offscreen"}>
           {error}
         </p>
-        <Form method="post" onSubmit={handleSubmit}>
+        <Form className='form-fields' method="post" onSubmit={handleSubmit}>
           <label htmlFor="username">
             *Username:
             <span className={validUsername ? "valid" : "hide"}>
@@ -249,18 +246,25 @@ function SignUp() {
           </p>
 
           <label htmlFor="organization">
-            Organization Name: <br /><span>(Choose only if you're a member of an organization)</span>
+            Organization Name: <br />
+            <span>(Choose only if you're a member of an organization)</span>
             <select
               id="organization"
               name="organization_name"
               onChange={(e) => {
-                setOrganization(e.target.value)
+                setOrganization(e.target.value);
               }}
             >
               <option value=""></option>
-              <option value="PAWS">Philippine Animal Welfare Society (PAWS)</option>
-              <option value="CARA">Compassion and Responsibility for Animals (CARA)</option>
-              <option value="PETA">People for the Ethical Treatment of Animals (PETA)</option>
+              <option value="PAWS">
+                Philippine Animal Welfare Society (PAWS)
+              </option>
+              <option value="CARA">
+                Compassion and Responsibility for Animals (CARA)
+              </option>
+              <option value="PETA">
+                People for the Ethical Treatment of Animals (PETA)
+              </option>
               <option value="AKF">Animal Kingdom Foundation (AKF)</option>
               <option value="PAWP">Pawssion Project</option>
               <option value="PART">Philippine Animal Rescue Team (PART)</option>
@@ -302,13 +306,9 @@ function SignUp() {
             character !@#$%
           </p>
 
-          <button
-            className="submit-btn"
-          >
-            Register
-          </button>
+          <button className="submit-btn">Register</button>
           <p className="form-text">
-            Already have an account?
+            Already have an account?{" "}
             <Link to="/login" className="form-link">
               Sign in
             </Link>
