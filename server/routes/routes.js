@@ -10,6 +10,7 @@ import {
 } from "./users.js";
 import {
   getReport,
+  getReports,
   postReport,
   deleteReport,
   updateReport,
@@ -39,6 +40,7 @@ router.delete("/user", auth, deleteUser);
 router.put("/user", auth, updateUser);
 
 router.get("/reports", auth, getReport);
+router.get("/allReports", auth, getReports);
 router.post("/report", auth, upload.single("strayImage"), postReport);
 router.delete("/report/:id", auth, deleteReport);
 router.put("/report/:id", auth, upload.single("strayImage"), updateReport);

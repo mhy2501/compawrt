@@ -16,6 +16,17 @@ const getReport = async (req, res) => {
     console.log(error);
   }
 };
+const getReports = async (req, res) => {
+  try {
+    const report = await pool.query(
+      `SELECT * FROM reports ORDER BY updated_at DESC`,
+      
+    );
+    res.json(report.rows);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const postReport = async (req, res) => {
   try {
@@ -89,14 +100,13 @@ const updateReport = async (req, res) => {
       provinceName,
       landmark,
       animalType,
-
-      status,
+      status
     } = req.body;
+    
     const updateReport = await pool.query(
       `
-            SELECT image_of_the_stray, cloudinary_id
-             FROM reports WHERE report_id = $1`,
-      [id]
+      SELECT image_of_the_stray, cloudinary_id
+             FROM reports WHERE report_id = $1`, [id]
     );
 
     let image;
@@ -106,7 +116,7 @@ const updateReport = async (req, res) => {
     } else {
       image = {
         secure_url: updateReport.rows[0].image_of_the_stray,
-        public_id: updateReport.rows[0].cloudinary_id,
+        public_id: updateReport.rows[0].cloudinary_id
       };
     }
 
@@ -125,7 +135,9 @@ const updateReport = async (req, res) => {
                 status,
                 updated_at
             ) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP)
-            WHERE report_id = $10 and user_id = $11 RETURNING*`,
+            WHERE report_id = $10 
+          
+            RETURNING*`,
       [
         streetName,
         barangayName,
@@ -136,8 +148,8 @@ const updateReport = async (req, res) => {
         image.secure_url,
         image.public_id,
         status,
-        id,
-        req.user.user_id,
+        id
+        // req.user.user_id,
       ]
     );
     res.json("Report updated successfully!");
@@ -171,10 +183,15 @@ const deleteReport = async (req, res) => {
 const editReport = async (req, res) => {
   try {
     const { id } = req.params;
-
+console.log(id)
     const editReport = await pool.query(
-      `SELECT * FROM reports WHERE report_id = $1 and user_id = $2`,
-      [id, req.user.user_id]
+      `SELECT * FROM reports WHERE report_id = $1
+      
+       `,
+      [id
+        // , 
+        // req.user.user_id
+      ]
     );
     res.json(editReport.rows);
     console.log(editReport.rows);
@@ -184,4 +201,4 @@ const editReport = async (req, res) => {
   }
 };
 
-export { getReport, postReport, deleteReport, updateReport, editReport };
+export { getReport, getReports, postReport, deleteReport, updateReport, editReport };

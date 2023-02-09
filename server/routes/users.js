@@ -18,9 +18,22 @@ const getUser = async (req, res) => {
 const registerUser = async (req, res) => {
   try {
     //take the username and password from the req.body
-    const { username, first_name, last_name, email, password } = req.body;
+    const { username, first_name, last_name, email, password, organization_name } = req.body;
+    console.log(req.body)
 
-    //Check if the user is already existing
+  
+    const orgUser = await pool.query(
+      `SELECT * FROM organizations
+      WHERE organization_name = $1`, [organization_name] 
+      );
+
+      let organization_id
+      if (orgUser.rows.length > 0) {
+        organization_id = orgUser.rows[0].organization_id
+      }
+     
+
+      //Check if the user is already existing
     const user = await pool.query(
       `SELECT * FROM users WHERE
         username = $1`,
@@ -30,7 +43,7 @@ const registerUser = async (req, res) => {
     if (user.rows.length > 0) {
       return res.status(400).send("Username already taken");
     }
-
+  
     //Check if the email is already existing
     const userEmail = await pool.query(
       `SELECT * FROM users WHERE
@@ -48,6 +61,7 @@ const registerUser = async (req, res) => {
 
     const bcryptPassword = await bcrypt.hash(password, salt);
 
+
     const newUser = await pool.query(
       `
         INSERT INTO users (
@@ -55,10 +69,11 @@ const registerUser = async (req, res) => {
             first_name, 
             last_name, 
             email, 
-            password
-           )
-        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [username, first_name, last_name, email, bcryptPassword]
+            password,
+            organization_id
+        )
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [username, first_name, last_name, email, bcryptPassword, organization_id]
     );
 
     //generate and return the JWT token
@@ -73,7 +88,6 @@ const registerUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    // const {id} = req.params
     const { username, first_name, last_name, email } = req.body;
 
     const updatedUser = await pool.query(
@@ -133,7 +147,6 @@ const loginUser = async (req, res) => {
 // provide the auth middleware
 const verifyUser = async (req, res) => {
   try {
-    //return the user object
     res.json(true);
   } catch (error) {
     console.log(err.message);

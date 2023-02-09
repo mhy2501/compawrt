@@ -4,9 +4,10 @@ import app from "../api/axios-config";
 import Dialog from "../components/Dialog";
 import "./History.css";
 
-function History() {
-  const [reportHistory, setReportHistory] = useState(useLoaderData());
-  console.log(reportHistory)
+function SaveMe() {
+    const data = useLoaderData()
+   
+  const [reportHistory, setReportHistory] = useState(data);
   const [dialog, setDialog] = useState({
     message: "",
     isLoading: false,
@@ -52,9 +53,19 @@ function History() {
                 className="card-img"
               ></img>
               <div>
+              {report.status === 'saved' ?
+              (
                 <p>
                   Date reported: <span>{report.report_date}</span>
                 </p>
+
+              ) : 
+              (
+                <p>
+                Date saved: <span>{report.updated_at}</span>
+              </p>
+              )
+              }
 
                 <p>
                   Status: <span>{report.status}</span>
@@ -88,4 +99,4 @@ function History() {
   );
 }
 
-export default History;
+export default SaveMe;

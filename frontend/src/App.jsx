@@ -19,6 +19,8 @@ import Report from "./pages/Report";
 import History from "./pages/History";
 import EditReport from "./components/EditReport";
 import "./App.css";
+import SaveMe from "./pages/SaveMe";
+import EditUserReport from "./components/EditUserReport";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -58,6 +60,10 @@ function App() {
         <Route path="ourbabies" element={<OurBabies />} />
         <Route
           path="signup"
+          loader={async () => {
+            const res =await app.get('/organization')
+            return res.data
+          }}
           element={
             isAuthenticated ? (
               <Navigate replace={true} to="/login" />
@@ -100,6 +106,30 @@ function App() {
           />
 
           <Route path="report" element={<Report />} />
+
+          <Route path="saveMe" 
+          loader={async () => {
+            const res = await app.get('/allReports')
+            return res.data
+          }}
+          element={<SaveMe />} 
+          />
+            <Route path='saveMe/editReport/:id'
+            loader={async ({params}) => {
+              const [ report, user] = await 
+              Promise.all([
+                app.get(`/report/${params.id}`),
+                app.get('/user')
+              ])
+            console.log('report',report,'user',user)
+              return ({report, user})
+              
+
+            
+            }}
+            element={<EditUserReport />} />
+
+           
           <Route
             path="history"
             loader={async () => {
@@ -110,12 +140,21 @@ function App() {
           />
           <Route
             path="history/editReport/:id"
-            loader={async ({ params }) => {
-              const res = await app.get(`/report/${params.id}`);
-              console.log(res.data);
-              return res.data;
+            // loader={async ({ params }) => {
+            //   const res = await app.get(`/report/${params.id}`);
+            //   console.log(res.data);
+            //   return res.data;
+            // }}
+            loader={async ({params}) => {
+              const [ report, user] = await 
+              Promise.all([
+                app.get(`/report/${params.id}`),
+                app.get('/user')
+              ])
+            console.log('report',report,'user',user)
+              return ({report, user})
             }}
-            element={<EditReport />}
+            element={<EditUserReport />}
           />
         </Route>
       </Route>
