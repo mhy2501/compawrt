@@ -24,9 +24,11 @@ import {
 } from "./organizations.js";
 import {
   getAnimalInfo,
+  getAnimalInfos,
   postAnimalInfo,
   deleteAnimal,
   updateAnimalInfo,
+  editAnimal,
 } from "./animal_infos.js";
 import { upload } from "../utils/multer.js";
 
@@ -51,9 +53,11 @@ router.post("/organization", postOrganization);
 router.delete("/organization/:id", auth, deleteOrganization);
 router.put("/organization/:id", auth, updateOrganization);
 
-router.get("/animal_infos", auth, getAnimalInfo);
-router.post("/animal_info", auth, postAnimalInfo);
-router.delete("/animal_info/:id", auth, deleteAnimal);
-router.put("/animal_info/:id", auth, updateAnimalInfo);
+router.get("/animalInfos", auth, getAnimalInfo);
+router.get("/allAnimalInfos", getAnimalInfos);
+router.post("/animalInfo", auth, upload.single("strayImage"), postAnimalInfo);
+router.delete("/animalInfo/:id", auth, deleteAnimal);
+router.put("/animalInfo/:id", auth, upload.single("strayImage"), updateAnimalInfo);
+router.get("/animalInfo/:id", auth, editAnimal);
 
 export { router };

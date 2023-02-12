@@ -1,10 +1,12 @@
 import {
   faAmbulance,
   faClipboard,
+  faDog,
   faHandHoldingDollar,
   faHandHoldingHand,
   faHome,
   faMobile,
+  faPaw,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -36,7 +38,25 @@ export const DashboardItems = [
   {
     title: "History",
     icon: faClipboard,
-    url: "/dashboard/history",
+    url: "/dashboard/reportHistory",
     cName: "dashboard-links",
   },
+  {
+    title: "Saved History",
+    icon: faClipboard,
+    url: "/dashboard/savedHistory",
+    cName: "dashboard-links",
+  },
+  {
+    title: "Post a Pet",
+    icon: faPaw,
+    url: "/dashboard/postAPet",
+    cName: "dashboard-links",
+  },
+  {
+    title: "Posted Fur Babies",
+    icon: faDog,
+    url: "/dashboard/postedFurBabies",
+    cName: "dashboard-links",
+  }
 ];

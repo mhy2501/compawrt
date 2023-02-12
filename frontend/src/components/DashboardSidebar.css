@@ -8,7 +8,7 @@
   align-items: center;
   margin: 0;
   background: rgb(240, 226, 236);
-  position:sticky
+  position:fixed;
 }
 .sidebar h1 {
   margin-bottom: 0;
@@ -27,6 +27,7 @@
   /* background-color: aqua; */
   width: 250px;
   position: relative;
+  
 
   /* top: 2rem; */
   bottom: 0;
@@ -36,15 +37,18 @@
   display: flex;
   left: 0;
   flex-direction: column;
-
+  size: 1.5rem;
   list-style: none;
   justify-content: center;
-  /* align-items: flex-start; */
+  align-items: flex-start;
+
 }
 
 .sidebar-items li {
-  padding: 1rem;
+  padding: 1rem 0;
   width: 100%;
+ 
+
 }
 
 .dashboard-links,
@@ -54,7 +58,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   padding: 0.7rem 1rem;
-  /* white-space: nowrap; */
+  white-space: wrap;
 }
 
 .logout-link {

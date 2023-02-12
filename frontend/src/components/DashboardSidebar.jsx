@@ -5,7 +5,14 @@ import "./DashboardSidebar.css";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 function DashboardSidebar({ data }) {
-  const navigate = useNavigate();
+console.log(data)
+  const dashboardItems = DashboardItems.filter((item) => { 
+    if (data[0].organization_id) { 
+      return item.title !== 'Report Now' && item.title !== 'History'
+    } 
+    return item.title !== 'Save Now' && item.title !== 'Saved History' && item.title !== 'Post a Pet' && item.title !== 'Posted Fur Babies'
+  })
+ console.log(dashboardItems)
 
   function handleLogout() {
     localStorage.clear();
@@ -18,7 +25,7 @@ function DashboardSidebar({ data }) {
       <h2>{data[0].username}!</h2>
       <div className="sidebar-menu">
         <ul className="sidebar-items">
-          {DashboardItems.map((item, index) => {
+          {dashboardItems.map((item, index) => {
             return (
               <li key={index}>
                 <div>

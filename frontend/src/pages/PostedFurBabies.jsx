@@ -4,16 +4,15 @@ import app from "../api/axios-config";
 import Dialog from "../components/Dialog";
 import "./History.css";
 
-function SaveMe() {
-    const data = useLoaderData()
-   
-  const [reportHistory, setReportHistory] = useState(data);
+function PostedFurBabies() {
+  const [postedFurBabies, setPostedFurBabies] = useState(useLoaderData());
+ 
   const [dialog, setDialog] = useState({
     message: "",
     isLoading: false,
   });
 
-  const reportRef = useRef();
+  const postRef = useRef();
 
   const handleDialog = (message, isLoading) => {
     setDialog({
@@ -24,16 +23,16 @@ function SaveMe() {
 
   const handleDelete = (id) => {
     handleDialog("Are you sure you want to delete this report?", true);
-    reportRef.current = id;
+    postRef.current = id;
   };
 
   const sureDelete = async (choose) => {
     if (choose) {
-      const res = await app.delete(`report/${reportRef.current}`);
-      const updatedHistory = reportHistory.filter(
-        (report) => report.report_id !== reportRef.current
+      const res = await app.delete(`animalInfo/${postRef.current}`);
+      const updatedPost = postedFurBabies.filter(
+        (post) => post.animal_id !== postRef.current
       );
-      setReportHistory(updatedHistory);
+      setPostedFurBabies(updatedPost);
       handleDialog("", false);
     } else {
       handleDialog("", false);
@@ -42,52 +41,39 @@ function SaveMe() {
 
   return (
     <div className="history-dashboard">
-      <h1>Save a life now!</h1>
+      <h1>Post History</h1>
       <div className="cards">
-        {reportHistory?.map((report) => {
+        {postedFurBabies?.map((post) => {
           return (
-            <div className="card-item" key={report.report_id}>
+            <div className="card-item" key={post.animal_id}>
               <img
-                src={report.image_of_the_stray}
-                alt="stray photo"
-                className="card-img"
+                src={post.image_url}
+                alt="pet animal"
+                className="card-image"
               ></img>
-              <div>
-              {report.status !== 'Saved' ?
-              (
-                <p>
-                  Date reported: <span>{report.report_date}</span>
-                </p>
+              <div className="card-text">
+               
 
-              ) : 
-              (
-                <p>
-                Date saved: <span>{report.updated_at}</span>
-              </p>
-              )
-              }
-
-                <p>
-                  Status: <span className={report.status === 'Saved' && 'save'}>{report.status}</span>
-                </p>
-              </div>
+                 {post.pet_name}
+                
+                
+             </div>
               <div className="btn">
                 <div>
-                  <Link to={`editReport/${report.report_id}`}>
+                  <Link to={`editPost/${post.animal_id}`}>
                     <button className="edit-btn">View/Edit</button>
                   </Link>
                 </div>
-                {/* <div>
+                <div>
                   <button
-                  disabled={User}
                     className="delete-btn"
                     onClick={() => {
-                      handleDelete(report.report_id);
+                      handleDelete(post.animal_id);
                     }}
                   >
                     Delete
                   </button>
-                </div> */}
+                </div>
               </div>
             </div>
           );
@@ -100,4 +86,4 @@ function SaveMe() {
   );
 }
 
-export default SaveMe;
+export default PostedFurBabies;
