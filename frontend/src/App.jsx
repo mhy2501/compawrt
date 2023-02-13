@@ -24,6 +24,7 @@ import EditUserReport from "./components/EditUserReport";
 import PostAPet from "./pages/PostAPet";
 import PostedFurBabies from "./pages/PostedFurBabies";
 import EditPost from "./components/EditPost";
+import ViewAnimalInfo from "./components/ViewAnimalInfo";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -66,6 +67,15 @@ function App() {
           return res.data
         }}
         element={<OurBabies />} />
+
+        <Route path="ourbabies/view/:id"
+        loader={async ({params}) => {
+          const res = await app.get(`./animalInfo/${params.id}`)
+          return res.data
+        }}
+        element={<ViewAnimalInfo />} />
+     
+
         <Route
           path="signup"
           loader={async () => {
@@ -156,6 +166,7 @@ function App() {
             element={<EditUserReport />}
           />
           <Route path='postAPet' element={<PostAPet />} />
+
           <Route path='postedFurBabies' 
           loader={async () => {
             const res = await app.get('./animalInfos')
@@ -163,6 +174,7 @@ function App() {
           }}
           element={<PostedFurBabies />} 
           />
+
           <Route path='postedFurBabies/editPost/:id'
           loader={async ({params}) => {
             const  res = await app.get(`/animalInfo/${params.id}`)
