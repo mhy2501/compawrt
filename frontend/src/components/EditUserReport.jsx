@@ -4,26 +4,25 @@ import app from "../api/axios-config";
 import "./EditReport.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatDate } from "../../utils/FileFormatter";
 
 function EditUserReport() {
   const params = useParams();
   const data = useLoaderData();
-  console.log('data',data)
-  const [reportData, setReportData] = useState(data.report.data[0]);
-  console.log("report",reportData)
-  const user = data.user.data
-  console.log("user", user)
-  const [image, setImage] =useState(null)
-  const [loading, setLoading] = useState(false);
 
- 
+  const [reportData, setReportData] = useState(data.report.data[0]);
+
+  const user = data.user.data;
+
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setReportData({ ...reportData, [e.target.name]: e.target.value });
   };
   const handleFileChange = (e) => {
     setReportData({ ...reportData, image_of_the_stray: e.target.files[0] });
-    setImage(URL.createObjectURL(e.target.files[0]))
+    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = async (e) => {
@@ -84,6 +83,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
               <label htmlFor="barangayName">*Barangay:</label>
               <input
@@ -94,6 +94,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
 
               <label htmlFor="municipalityName">*Municipality:</label>
@@ -105,6 +106,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
 
               <label htmlFor="provinceName">*Province:</label>
@@ -116,6 +118,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
 
               <label htmlFor="landmark">*Landmark:</label>
@@ -127,6 +130,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
 
               <label htmlFor="animalType">*Type of animal:</label>
@@ -138,6 +142,7 @@ function EditUserReport() {
                 autoComplete="off"
                 onChange={handleChange}
                 required
+                disabled={user.organization_id ? true : false}
               />
 
               <label htmlFor="strayImage">*Stray Image:</label>
@@ -148,25 +153,39 @@ function EditUserReport() {
                 id="strayImage"
                 autoComplete="off"
                 onChange={handleFileChange}
+                disabled={user.organization_id ? true : false}
               />
 
-                {user.organization_id !== null && 
-                 
-              <label htmlFor="status">
+                  
+                  <label htmlFor="reportDate">Date Reported:</label>
+                  <input
+                    value={formatDate(reportData.updated_at)}
+                    type="datetime"
+                    id="reportDate"
+                    name="updated_at"
+                    disabled
+                    ></input>
+
+                    {user.organization_id !== null && 
+                      (
+                <label htmlFor="status">
                   *Status:
-                <select
-                  id="status"
-                  name="status"
-                  value={reportData.status}
-                  onChange={handleChange}
-                >
-                  <option value="waiting to be saved">
-                    Waiting to be saved
-                  </option>
-                  <option value="Saved">Saved</option>
-                </select>
-              </label>
-                }
+                  <select
+                    id="status"
+                    name="status"
+                    value={reportData.status}
+                    onChange={handleChange}
+                  >
+                    <option value="waiting to be saved">
+                      Waiting to be save
+                    </option>
+                    <option value="Saved">Saved</option>
+                  </select>
+                </label>
+              
+
+                
+                )}
 
               <button className="submit-btn">
                 {loading ? "Updating..." : "Update"}

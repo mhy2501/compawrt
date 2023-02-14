@@ -4,11 +4,12 @@ import app from "../api/axios-config";
 import "./EditReport.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatDate } from "../../utils/FileFormatter";
 
 function EditPost() {
   const params = useParams();
   const data = useLoaderData();
-console.log(data)
+
   const [postData, setPostData] = useState(data[0]);
 
   const [image, setImage] = useState(null);
@@ -136,7 +137,7 @@ console.log(data)
                   
                   <label htmlFor="postDate">Date Posted:</label>
                   <input
-                    value={postData.updated_at}
+                    value={formatDate(postData.updated_at)}
                     type="datetime"
                     id="postDate"
                     name="updated_at"
@@ -157,9 +158,6 @@ console.log(data)
                   </select>
                 </label>
               
-
-               
-
               <button className="submit-btn">
                 {loading ? "Updating..." : "Update"}
               </button>

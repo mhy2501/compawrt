@@ -10,11 +10,9 @@ function PostAPet() {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
   const [description, setDescription] = useState("");
-  const [forAdoption, setForAdoption] = useState(true);
   const [type, setType] = useState("")
   const [animalImage, setAnimalImage] = useState("");
  
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -28,16 +26,13 @@ function PostAPet() {
       formData.append("gender", gender);
       formData.append("description", description);
       formData.append("type", type);
-      formData.append("for_adoption", forAdoption);
-      
-
+     
       const res = await app.post("/animalInfo", formData);
       console.log(res.data);
       setPetName("");
       setAge("");
       setGender("");
       setDescription("");
-      setForAdoption("");
       setType("");
       setAnimalImage("");
 
@@ -131,15 +126,13 @@ function PostAPet() {
             }}
             required
           />
-
           
-
-          <label htmlFor="imageurl">*Pet Image:</label>
+          <label htmlFor="imageUrl">*Pet Image:</label>
           <input
             type="file"
             accept="image/*"
             name="strayImage"
-            id="imageurl"
+            id="imageUrl"
             autoComplete="off"
             onChange={(e) => {
               setAnimalImage(e.target.files[0]);
