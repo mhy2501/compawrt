@@ -3,9 +3,13 @@ import { Link, useLoaderData } from "react-router-dom";
 import app from "../api/axios-config";
 import Dialog from "../components/Dialog";
 import "./History.css";
+import { formatDate } from "../../utils/FileFormatter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function PostHistory() {
   const [postedFurBabies, setPostedFurBabies] = useState(useLoaderData());
+  const [searchResults, setSearchResults] = useState('')
  
   const [dialog, setDialog] = useState({
     message: "",
@@ -42,13 +46,31 @@ function PostHistory() {
   return (
     <div className="history-dashboard">
       <h1>Post History</h1>
+      <div className="search-bar">
+        <form className="search-form">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+        <input 
+        className="search-input"
+        type='text'
+        placeholder='Search by name, gender, status, type or age'
+        onChange={(e) => setSearchResults(e.target.value)} />
+      </form>
+      </div>
       <div className="reminder">
         <p className="reminder-head">Reminder*** <span className="reminder-txt">Please update the status of your pets if it was already adopted.</span></p>
       </div>
       <div className="cards">
         {postedFurBabies.length > 0 ? 
         ( 
-          postedFurBabies.map((post) => {
+          postedFurBabies.filter((post) => {
+            return searchResults.toLowerCase() === '' ? post :
+            post.status.toLowerCase().includes(searchResults.toLowerCase()) ||
+            post.pet_name.toLowerCase().includes(searchResults.toLowerCase()) ||
+            post.gender.toLowerCase().includes(searchResults.toLowerCase()) ||
+            post.type.toLowerCase().includes(searchResults.toLowerCase()) ||
+            post.age.toLowerCase().includes(searchResults.toLowerCase())
+          })
+          .map((post) => {
           return (
             <div className="card-item" key={post.animal_id}>
               <img

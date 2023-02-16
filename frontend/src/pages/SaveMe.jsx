@@ -2,16 +2,37 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { formatDate } from "../../utils/FileFormatter";
 import "./History.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function SaveMe() {
   const [reportHistory] = useState(useLoaderData());
+  const [searchResults, setSearchResults] = useState('')
 
   return (
     <div className="history-dashboard">
       <h1>Save a life now!</h1>
+      <div className="search-bar">
+        <form className="search-form">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+        <input 
+        className="search-input"
+        type='text'
+        placeholder='Search by type or location'
+        onChange={(e) => setSearchResults(e.target.value)} />
+      </form>
+      </div>
       <div className="cards">
         {reportHistory.length > 0 ? (
-          reportHistory.map((report) => {
+          reportHistory.filter((report) => {
+            return searchResults.toLowerCase() === '' ? report :
+            report.animal_type.toLowerCase().includes(searchResults) ||
+            report.last_seen_at_street_name.toLowerCase().includes(searchResults) ||
+            report.last_seen_at_barangay_name.toLowerCase().includes(searchResults) ||
+            report.last_seen_at_municipality_name.toLowerCase().includes(searchResults) ||
+            report.last_seen_at_province_name.toLowerCase().includes(searchResults)
+          })
+          .map((report) => {
             return (
               <div className="card-item" key={report.report_id}>
                 <img
@@ -33,7 +54,7 @@ function SaveMe() {
 
                   <p>
                     Status:{" "}
-                    <span className={report.status === "Saved" && "save"}>
+                    <span className={report.status === "Saved" ? "save" : ""}>
                       {report.status}
                     </span>
                   </p>

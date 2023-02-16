@@ -1,7 +1,6 @@
 import MyNavBar from "../components/MyNavBar";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import app from "../api/axios-config";
 import "./babies.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -10,18 +9,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
 function OurBabies() {
+  const [postedFurBabies] = useState(useLoaderData());
+  const [searchResults, setSearchResults] = useState("");
+
   const settings = {
     dots: true,
     infinite: true,
-    // speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 2000,
     cssEase: "linear",
     nextArrow: (
       <div>
@@ -74,8 +76,6 @@ function OurBabies() {
     ],
   };
 
-  const [postedFurBabies] = useState(useLoaderData());
-
   return (
     <div className="container">
       <MyNavBar />
@@ -87,23 +87,54 @@ function OurBabies() {
         <div className="card-txt">
           They are looking for their forever homes. One of them (or two) might
           be the perfect addition to your family.
+          <div className="search-bar">
+            <form className="search-form">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => setSearchResults(e.target.value)}
+              />
+            </form>
+          </div>
         </div>
 
         <Slider {...settings}>
-          {postedFurBabies?.map((post) => {
-            return (
-              <div className="baby-cards" key={post.animal_id}>
-                <Link to={`view/${post.animal_id}`}>
-                  <img
-                    src={post.image_url}
-                    alt="pet animal"
-                    className="card-images"
-                  ></img>
-                </Link>
-                <div className="card-name">{post.pet_name}</div>
-              </div>
-            );
-          })}
+          {postedFurBabies
+            ?.filter((post) => {
+              return searchResults.toLowerCase() === ""
+                ? post
+                : post.status
+                    .toLowerCase()
+                    .includes(searchResults.toLowerCase()) ||
+                    post.pet_name
+                      .toLowerCase()
+                      .includes(searchResults.toLowerCase()) ||
+                    post.gender
+                      .toLowerCase()
+                      .includes(searchResults.toLowerCase()) ||
+                    post.type
+                      .toLowerCase()
+                      .includes(searchResults.toLowerCase()) ||
+                    post.age
+                      .toLowerCase()
+                      .includes(searchResults.toLowerCase());
+            })
+            .map((post) => {
+              return (
+                <div className="baby-cards" key={post.animal_id}>
+                  <Link to={`view/${post.animal_id}`}>
+                    <img
+                      src={post.image_url}
+                      alt="pet animal"
+                      className="card-images"
+                    ></img>
+                  </Link>
+                  <div className="card-name">{post.pet_name}</div>
+                </div>
+              );
+            })}
         </Slider>
       </div>
     </div>
