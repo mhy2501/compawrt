@@ -1,42 +1,38 @@
 .org-cards {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem
-   
-   
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 }
 
 .org-links {
-    width: 50%;
-    min-width: 30%;
-    height: 50%;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    /* margin: 0 */
+  width: 50%;
+  min-width: 30%;
+  height: 50%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 .org-img {
-   width: 50%;
-   height: 50%;
-   padding: 5px;
-  
+  width: 50%;
+  height: 50%;
+  padding: 5px;
 }
 
 .volunteer-btn,
 .donate-btn {
-    padding: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    /* margin-top: 0.5rem; */
-    color: rgb(3, 20, 23);
-    
-    outline: none;
-    background: transparent
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: rgb(26, 113, 128);
+
+  outline: none;
 }

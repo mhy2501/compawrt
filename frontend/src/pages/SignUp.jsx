@@ -1,11 +1,10 @@
 import SignUpImg from "../assets/loginsignup.jpg";
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Form, Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import app from "../api/axios-config";
 import "./Signup.css";
-
 
 const USERNAME_REGEX = /^[A-Za-z][a-zA-Z0-9-_]{3,23}$/;
 const NAME_REGEX = /^[A-Za-z]+$/;
@@ -15,10 +14,12 @@ const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 function SignUp() {
-  
   const usernameRef = useRef();
+ 
   const errRef = useRef();
   const navigate = useNavigate();
+  const [organization, setOrganization] = useState(useLoaderData()) 
+  
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
@@ -35,9 +36,6 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
-
-  
-  const [organization, setOrganization] = useState("");
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
@@ -79,8 +77,8 @@ function SignUp() {
     try {
       const data = Object.fromEntries(new FormData(e.target));
       const res = await app.post("/register", data);
-      navigate('/dashboard')
-      console.log(data)
+      navigate("/login");
+      console.log(data);
       setUsername("");
       setFirstName("");
       setLastName("");
@@ -108,7 +106,7 @@ function SignUp() {
         <p ref={errRef} className={error ? "error" : "offscreen"}>
           {error}
         </p>
-        <Form method="post" onSubmit={handleSubmit}>
+        <Form className='form-fields' method="post" onSubmit={handleSubmit}>
           <label htmlFor="username">
             *Username:
             <span className={validUsername ? "valid" : "hide"}>
@@ -249,22 +247,31 @@ function SignUp() {
           </p>
 
           <label htmlFor="organization">
-            Organization Name: <br /><span>(Choose only if you're a member of an organization)</span>
-            <select
+            Organization Name: <br />
+            <span>(Choose only if you're a member of an organization)</span>
+            <select 
               id="organization"
               name="organization_name"
               onChange={(e) => {
-                setOrganization(e.target.value)
+                setOrganization(e.target.value);
               }}
-            >
-              <option value=""></option>
-              <option value="PAWS">Philippine Animal Welfare Society (PAWS)</option>
-              <option value="CARA">Compassion and Responsibility for Animals (CARA)</option>
-              <option value="PETA">People for the Ethical Treatment of Animals (PETA)</option>
-              <option value="AKF">Animal Kingdom Foundation (AKF)</option>
-              <option value="PAWP">Pawssion Project</option>
-              <option value="PART">Philippine Animal Rescue Team (PART)</option>
-              <option value="other">Other</option>
+              >
+                {/* <option 
+                value={null}></option>
+              {organization?.map((org) => {
+                return (
+              <option key={org.organization_id}
+              value={org.organization_id}>{org.organization_name}</option>
+              )
+            })} */}
+            <option value=''></option>
+            <option value='Philippine Animal Welfare Society (PAWS)'>Philippine Animal Welfare Society (PAWS)</option>
+            <option value='Compassion and Responsibility for Animals (CARA)'>Compassion and Responsibility for Animals (CARA)</option>
+            <option value='People for the Ethical Treatment of Animals (PETA)'>People for the Ethical Treatment of Animals (PETA)</option>
+            <option value='Animal Kingdom Foundation (AKF)'>Animal Kingdom Foundation (AKF)</option>
+            <option value='Pawssion Project'>Pawssion Project</option>
+            <option value='Philippine Animal Rescue Team (PART)'>Philippine Animal Rescue Team (PART)</option>
+            <option value='Other'>Other</option>
             </select>
           </label>
 
@@ -302,13 +309,9 @@ function SignUp() {
             character !@#$%
           </p>
 
-          <button
-            className="submit-btn"
-          >
-            Register
-          </button>
+          <button className="submit-btn">Register</button>
           <p className="form-text">
-            Already have an account?
+            Already have an account?{" "}
             <Link to="/login" className="form-link">
               Sign in
             </Link>
