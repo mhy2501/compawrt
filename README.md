@@ -1,5 +1,5 @@
 
-![Compawrt](https://drive.google.com/file/d/1e4Q77pts9HpvKbODbSU3mAdq23F6SAnP/view?usp=share_link)
+![Compawrt](/repository/frontend/src/assets/compawrtlogo.png?raw=true "Compawrt title")
 
 
 # Compawrt
@@ -11,15 +11,15 @@ Compawrt is a web application that makes it easier for concerned citizens to rep
 
 ### Landing Page
 
-![App Homepage](https://drive.google.com/file/d/1bP11_9ZSO7ee0U9ys89i-SkEGf69otzr/view?usp=share_link)
+![App Homepage](/repository/frontend/src/assets/Homepage.png?raw=true "Homepage title")
 
 ### Report Page
 
-![App Dashboard](https://drive.google.com/file/d/1gdJzJRDq-6djPczmSV_2unJreqee1cOb/view?usp=share_link)
+![App Dashboard](/repository/frontend/src/assets/Dashboard.png?raw=true "Dashboard title")
 
 ### Our Babies Page
 
-![App Adoption Page](https://drive.google.com/file/d/1Uk0UrKOhLWeZ5LCr373ZxwZ-mWLC3thv/view?usp=share_link)
+![App Adoption Page](/repository/frontend/src/assets/OurBabies.png?raw=true "Adoption Page title")
 
 
 ## Features
