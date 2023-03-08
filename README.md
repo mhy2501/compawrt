@@ -83,6 +83,7 @@ Start the client
 - [Font Awesome](https://fontawesome.com/v6/docs/web/use-with/react/)
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
 - [EmailJS](https://www.emailjs.com/)
+
 **Server:**
 - [NodeJS](https://nodejs.org/en/)
 - [Express](http://expressjs.com/)
