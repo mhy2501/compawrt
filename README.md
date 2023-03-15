@@ -33,31 +33,31 @@ Compawrt is a web application that makes it easier for concerned citizens to rep
 ## Tech Stack
 
 **Client:** 
-- [React Vite](https://vitejs.dev)
-- [HTML 5](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS 3](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [Javascript](https://developer.mozilla.org/en-US/docs/Web/javascript)
-- [Font Awesome](https://fontawesome.com/v6/docs/web/use-with/react/)
-- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
-- [EmailJS](https://www.emailjs.com/)
+- [React Vite](https://vitejs.dev) - a build tool that aims to provide a faster and leaner development experience for modern web projects
+- [HTML 5](https://developer.mozilla.org/en-US/docs/Web/HTML) - the most advanced HTML version where lot of tags were added
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - style sheet language which is used to describe the look and formatting of a document written in markup language
+- [Javascript](https://developer.mozilla.org/en-US/docs/Web/javascript) - a scripting or programming language that allows you to implement complex features on web pages
+- [Font Awesome](https://fontawesome.com/v6/docs/web/use-with/react/) - a great resource to use various types of icons in your project
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/) - a library for React that allows developers to easily create and display toast notifications in their React applications
+- [EmailJS](https://www.emailjs.com/) - helps to send emails using client-side technologies only. No server is required.
 
 **Server:**
-- [NodeJS](https://nodejs.org/en/)
-- [Express](http://expressjs.com/)
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
-- [CORS](https://www.npmjs.com/package/cors)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- [Multer](https://www.npmjs.com/package/multer)
-- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [NodeJS](https://nodejs.org/en/) - an open-source, cross-platform JavaScript runtime environment
+- [Express](http://expressjs.com/) - fast, unopinionated, minimalist web framework for Node.js
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs) - a pure js implementation version of bcrypt hashing algorithm that allows you to easily create a hash out of a password string.
+- [CORS](https://www.npmjs.com/package/cors) - a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+- [dotenv](https://www.npmjs.com/package/dotenv) - a zero-dependency module that loads environment variables from a .env file into process.env
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - an implementation of JSON Web Tokens and developed against draft-ietf-oauth-json-web-token-08.
+- [Multer](https://www.npmjs.com/package/multer) - a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+- [Nodemon](https://www.npmjs.com/package/nodemon) - a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 
 (See package.json for more libraries used)
 
 **Image Storage:**
-- [Cloudinary](https://cloudinary.com/)
+- [Cloudinary](https://cloudinary.com/) - a SaaS technology company that  provides cloud-based image and video management services.
 
 **Database Management System:**
-- [PostgreSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/) - a powerful, open source object-relational database system
 
 
 ## Database Setup
@@ -66,11 +66,11 @@ Compawrt is a web application that makes it easier for concerned citizens to rep
 2. Setup new database instance:
     - Open SQL shell.
     - Login to your database.
-    - Open the 'capstone_project.sql' file.
+    - Open the `capstone_project.sql` file.
     - Copy and paste `CREATE DATABASE <your database name>;` into the command line of SQL shell.
     - After creating the database, type `\c <your database name>` (without the `< >`) into the command line.
     - Execute commands from file by typing `\i <...path to file/capstone_project.sql>`. Note that when executing this command in Windows, single quotes should be added like   this `\i '<...path to file/capstone_project.sql>'`
-    - (Optional, if the steps above doesn't work) Individually copy all the CREATE TABLE statements from the 'capstone_project.sql' file into the command line to create your tables.
+    - (Optional, if the steps above doesn't work) Individually copy all the CREATE TABLE statements from the `capstone_project.sql` file into the command line to create your tables.
 
 
 ## Cloudinary Setup
@@ -105,7 +105,7 @@ To run the app locally, follow these steps:
    database: '<your database name>'
    ```
    
-5. Create `.env` variable and type the following:
+5. In your server folder root directory, create `.env` variable with the following contents:
    - `jwtSecret = <your password-like string here>`
    - `FRONTEND_URL = http://localhost:<your client local/port>`
    - `CLOUDINARY_CLOUD_NAME = <your cloudinary name from your cloudinary account dashboard>`
